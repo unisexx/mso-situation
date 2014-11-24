@@ -2,7 +2,7 @@
 
 function login($username,$password)
 {
-	$password = md5(sha1($password."secret"));
+	// $password = md5(sha1($password."secret"));
 	$CI =& get_instance();
 	$user = new User();
 	$user->where(array('username'=>$username,'password'=>$password))->get();

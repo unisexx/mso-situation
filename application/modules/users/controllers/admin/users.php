@@ -27,7 +27,7 @@ class Users extends Admin_Controller
 		if($_POST)
 		{
 			$user = new User($id);
-			$_POST['password'] = md5(sha1($_POST['password']."secret"));
+			// $_POST['password'] = md5(sha1($_POST['password']."secret"));
 			$user->from_array($_POST);
 			$user->save();
 			set_notify('success', lang('save_data_complete'));	
