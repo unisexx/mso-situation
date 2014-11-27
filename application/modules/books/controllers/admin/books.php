@@ -10,9 +10,9 @@ class Books extends Admin_Controller
 	function index()
 	{
 		$data['books'] = new Book();
-        if(@$_GET['title'])$data['book']->where("url title '%".$_GET['title']."%'");
-        if(@$_GET['category_id'])$data['book']->where('category_id',$_GET['category_id']);
-		$data['books']->order_by('id','desc')->get_page();
+        if(@$_GET['title'])$data['books']->where("title like '%".$_GET['title']."%'");
+        if(@$_GET['category_id'])$data['books']->where('category_id',$_GET['category_id']);
+		$data['books']->order_by('orderlist','asc')->get_page();
 		$this->template->append_metadata(js_lightbox());
 		$this->template->append_metadata(js_checkbox('approve'));
 		$this->template->build('admin/index',$data);
@@ -69,5 +69,22 @@ class Books extends Admin_Controller
 		}
 		redirect($_SERVER['HTTP_REFERER']);
 	}
+	
+	function save_orderlist($id=FALSE){
+        if($_POST)
+        {
+                foreach($_POST['orderlist'] as $key => $item)
+                {
+                    if($item)
+                    {
+                        $book = new Book(@$_POST['orderid'][$key]);
+                        $book->from_array(array('orderlist' => $item));
+                        $book->save();
+                    }
+                }
+            set_notify('success', lang('save_data_complete'));
+        }
+        redirect($_SERVER['HTTP_REFERER']);
+    }
 }
 ?>

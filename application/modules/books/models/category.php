@@ -3,7 +3,7 @@ class Category extends ORM {
 
     var $table = 'categories';
 	
-	var $has_one = array("user");
+	// var $has_one = array("user");
 	
 	var $has_many = array("book");
 

@@ -1,4 +1,15 @@
+<script src="media/js/jquery-1.4.2.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#body_shelf img").click(function(){
+		$.get('books/counter',{
+			id : $(this).next('input[name=book_id]').val()
+		});
+	});
+});
+</script>
 <style>
+	body{margin: 0;padding: 0}
 	#header_shelf{background: url("themes/situation/images/Bookshelf_01.jpg") no-repeat; width:1000px; height:65px; position:relative;}
 	#body_shelf{background: url("themes/situation/images/Bookshelf_02.jpg") repeat-y; width:1000px;}
 	#category{position:absolute; right:25px; top:20px;}
@@ -20,7 +31,10 @@
 	<div id="body_shelf">
 		<?foreach($books as $row):?>
       		<span class="book">
-      			<a href="<?=$row->url?>" target="_blank"><img src="uploads/book/<?=$row->image?>" border="1" style="border-color:#CC6600" title="สถานการณ์ประชากรอาเซียน"/></a>
+      			<a href="<?=$row->url?>" target="_blank">
+      				<img src="uploads/book/<?=$row->image?>" border="1" style="border-color:#CC6600" title="<?=$row->title?>"/>
+      				<input type="hidden" name="book_id" value="<?=$row->id?>">
+      			</a>
       		</span>
       	<?endforeach;?>
       	<br clear="all">

@@ -1,4 +1,4 @@
-<h1>เกี่ยวกับสมาชิก</h1>
+<h1>หนังสือ</h1>
 <form id="frmMain" action="books/admin/books/save/<?php echo $book->id ?>" method="post" enctype="multipart/form-data" >
 	
 <table class="form">
