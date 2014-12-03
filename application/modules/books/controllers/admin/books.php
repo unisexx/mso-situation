@@ -12,7 +12,7 @@ class Books extends Admin_Controller
 		$data['books'] = new Book();
         if(@$_GET['title'])$data['books']->where("title like '%".$_GET['title']."%'");
         if(@$_GET['category_id'])$data['books']->where('category_id',$_GET['category_id']);
-		$data['books']->order_by('orderlist','asc')->get_page();
+		$data['books']->order_by('orderlist','asc')->order_by('id','desc')->get_page();
 		$this->template->append_metadata(js_lightbox());
 		$this->template->append_metadata(js_checkbox('approve'));
 		$this->template->build('admin/index',$data);

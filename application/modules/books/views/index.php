@@ -13,8 +13,9 @@ $(document).ready(function(){
 	#header_shelf{background: url("themes/situation/images/Bookshelf_01.jpg") no-repeat; width:1000px; height:65px; position:relative;}
 	#body_shelf{background: url("themes/situation/images/Bookshelf_02.jpg") repeat-y; width:1000px;}
 	#category{position:absolute; right:25px; top:20px;}
-	.book{float: left; margin:19 0 10px 44px;}
+	.book{float: left; margin:19 0 10px 44px; position:relative;}
 	h1{text-align:center; padding-top:10px;}
+	.label_counter{position: absolute;bottom: 0px;background: rgba(0, 0, 0, 0.5);color: goldenrod;width: 115px;text-align: center;font-size:12px;}
 </style>
 <div>
 	<div id="header_shelf">
@@ -32,6 +33,7 @@ $(document).ready(function(){
 		<?foreach($books as $row):?>
       		<span class="book">
       			<a href="<?=$row->url?>" target="_blank">
+      				<span class="label_counter">อ่านแล้ว <?=$row->counter?> ครั้ง</span>
       				<img src="uploads/book/<?=$row->image?>" border="1" style="border-color:#CC6600" title="<?=$row->title?>"/>
       				<input type="hidden" name="book_id" value="<?=$row->id?>">
       			</a>
