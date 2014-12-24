@@ -12,9 +12,10 @@ class Books extends Admin_Controller
 		$data['books'] = new Book();
         if(@$_GET['title'])$data['books']->where("title like '%".$_GET['title']."%'");
         if(@$_GET['category_id'])$data['books']->where('category_id',$_GET['category_id']);
-		$data['books']->order_by('orderlist','asc')->order_by('id','desc')->get_page();
+		$data['books']->order_by('orderlist','desc')->get_page();
 		$this->template->append_metadata(js_lightbox());
 		$this->template->append_metadata(js_checkbox('approve'));
+			
 		$this->template->build('admin/index',$data);
 	}
 	
@@ -38,6 +39,11 @@ class Books extends Admin_Controller
 				if($id)$book->delete_file($book->id,'uploads/book/thumbnail','image',115,162);
 				$book->image = $book->upload($_FILES['image'],'uploads/book/');
 			}
+			
+			$sql = "select max(id) id from books limit 1";
+        	$max = $this->db->query($sql)->row_array();
+			$_POST['orderlist'] = $max['id']*10;
+			
 			$book->from_array($_POST);
 			$book->save();
 			set_notify('success', lang('save_data_complete'));

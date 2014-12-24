@@ -10,7 +10,7 @@ class Categories extends Admin_Controller
 	function index()
 	{
 		$data['categories'] = new Category();
-		$data['categories']->order_by('id','desc')->get_page();
+		$data['categories']->order_by('id','asc')->get_page();
 		$this->template->build('admin/category_index',$data);
 	}
 	
