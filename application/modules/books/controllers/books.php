@@ -16,6 +16,26 @@ class Books extends Public_Controller
 		$this->load->view('index',$data);
 	}
 	
+	function view(){
+		$book = new Book();
+		if(@$_GET['category']){ $book->where('category_id = '.$_GET['category']); }
+		$data['books'] = $book->where('category_id = 9 or category_id = 8 and status = "approve"')->order_by('orderlist','desc')->get();
+		
+		$category = new Category();
+		$data['categories'] = $category->order_by('name asc')->get();
+		$this->load->view('view',$data);
+	}
+	
+	function view2(){
+		$book = new Book();
+		if(@$_GET['category']){ $book->where('category_id = '.$_GET['category']); }
+		$data['books'] = $book->where('category_id = 9 or category_id = 8 and status = "approve"')->order_by('orderlist','desc')->get();
+		
+		$category = new Category();
+		$data['categories'] = $category->where('id = 9 and id = 8')->order_by('name asc')->get();
+		$this->load->view('view2',$data);
+	}
+	
 	function counter(){
 		$book = new Book($_GET['id']);
 		$book->counter();
