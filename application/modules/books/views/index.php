@@ -21,6 +21,7 @@ $(document).ready(function(){
 <div>
 	<div id="header_shelf">
 		<h1></h1>
+		<?if(@$_GET['dropdown'] != "no"):?>
 		<span id="category">
 			<select onchange="window.location='books?category='+this.value">
 			<option value="">ทุกหมวด</option>
@@ -29,6 +30,7 @@ $(document).ready(function(){
 			<?endforeach;?>
 			</select>
 		</span>
+		<?endif;?>
 	</div>
 	<div id="body_shelf">
 		<?foreach($books as $row):?>
